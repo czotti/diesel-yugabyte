@@ -1,0 +1,14 @@
+[package]
+name = "yugabyte"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+diesel = { version = "2.2", features = [
+    "chrono",
+    "postgres",
+    "r2d2",
+    "serde_json",
+    "uuid",
+] }
+
