@@ -16,7 +16,7 @@ git clone https://github.com/czotti/diesel-yugabyte.git
 # 5. Run the migration with diesel
 diesel migration run --database-url 'postgres://user:password@yugabyte_addr.fqdn/db1
 ```
-
+# Issue
 This is the output I get when running the diesel migration on a fresh database
 ```bash
 ❯ diesel migration run --database-url 'postgres://user:password@yb-tserver.local:5433/db1'
@@ -30,3 +30,14 @@ Running migration 2024-09-11-120055_update_uuid
 ```
 
 I need to retry the migration and it works.
+
+# Workaround
+
+I have found about the use of `metadata.toml` file in diesel and adding this file with
+```bash
+echo "run_in_transaction = false" > migrations/2024-09-11-120055_update_uuid/metadata.toml
+```
+
+Fix the above issue.
+
+Also removing the `UPDATE` sql part obvioulsy avoid this issue.
